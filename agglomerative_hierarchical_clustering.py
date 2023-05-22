@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.metrics import confusion_matrix
-from sklearn.cluster import KMeans
+from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler
 
 
@@ -21,7 +21,7 @@ def calculate_f_measure(predicted_labels, true_labels):
     return np.mean(f_measure)
 
 
-def kmeans(filename):
+def agglomerative_hierarchy(filename):
     # Load dataset
     dataset = pd.read_csv(filename)
 
@@ -36,27 +36,22 @@ def kmeans(filename):
     # Perform k-means clustering
     K = [2, 4, 6, 8, 10]
     for k in K:
-        purity = []
-        f_measure = []
-        for i in range(10):
-            kmeans = KMeans(n_clusters=k, random_state=42)
-            kmeans.fit(X_scaled)
+        agglomerative_clustering = AgglomerativeClustering(n_clusters=k, linkage="ward")
+        agglomerative_clustering.fit(X_scaled)
 
-            labels = kmeans.labels_
+        labels = agglomerative_clustering.labels_
 
-            # Calculate Purity
-            purity.append(round(calculate_purity(labels, true_labels), 2))
+        print("Agglomerative Hierarchy Clustering K=", k)
 
-            # Calculate F-measure
-            f_measure.append(round(calculate_f_measure(labels, true_labels), 2))
+        # Calculate Purity
+        purity = calculate_purity(labels, true_labels)
+        print("Purity:", purity)
 
-        # Calculate Average of purity and f-measure
-        purity_mo = round(sum(purity) / len(purity), 2)
-        f_measure_mo = round(sum(f_measure) / len(f_measure), 2)
+        # Calculate F-measure
+        f_measure = calculate_f_measure(labels, true_labels)
+        print("F-measure:", f_measure)
 
-        print("Average K-means scores with K=", k)
-        print("Purity=", purity_mo)
-        print("F-measure=", f_measure_mo, "\n")
+        print()
 
 
-kmeans('data/train.csv')
+agglomerative_hierarchy('data/train.csv')
