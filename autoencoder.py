@@ -67,6 +67,14 @@ def auto_encoder():
         # Pass the data (e.g., X_train_scaled) through the encoder model to obtain the encoded data
         encoded_data = encoder_model.predict(X_scaled)
 
+        if m == 2:
+            # Plot the encoded data
+            plt.scatter(encoded_data[:, 0], encoded_data[:, 1])
+            plt.xlabel('Encoded Dimension 1')
+            plt.ylabel('Encoded Dimension 2')
+            plt.title('Encoded Data')
+            plt.show()
+
         scaler = StandardScaler()
         encoded_data_scaled = scaler.fit_transform(encoded_data)
 

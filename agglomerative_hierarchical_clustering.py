@@ -33,7 +33,7 @@ def agglomerative_hierarchy(filename):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    # Perform k-means clustering
+    # Perform agglomerative hierarchy clustering
     K = [2, 4, 6, 8, 10]
     for k in K:
         agglomerative_clustering = AgglomerativeClustering(n_clusters=k, linkage="ward")
