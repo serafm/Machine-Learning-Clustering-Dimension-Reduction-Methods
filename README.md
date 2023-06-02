@@ -8,7 +8,6 @@ This repository contains a collection of machine learning algorithms, specifical
 - [Features](#features)
 - [Installation](#installation)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -31,8 +30,3 @@ To use this project, follow the steps below:
 ## Contributing
 
 Contributions are welcome! If you have suggestions, bug reports, or would like to add new algorithms, please feel free to open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). Feel free to use and modify the code for your own purposes.
-
